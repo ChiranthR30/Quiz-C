@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <string.h>
+#include <winsock2.h>
+#include <stdlib.h>
+
+void displayquestions(char [],int [],char [],char [],char [],char [],FILE *);
+
+void displayans(char [],int [],char [],char [],char [],char []);
+
+int main(){
+    FILE *fpp=fopen("ques.txt","r");
+
+    char ch[500],line[500],option1[50],option2[50],option3[50],option4[50];
+    int correct[50];
+    int option[100];
+
+	
+	int seloption;
+	printf("\n \n");
+	do{	
+	printf("\n \t \t \t ---------------------QUIZ----------------------- \n  ");
+	printf(" \n \n >>> 1. Display instructions \n");
+	printf(" >>> 2. Display Questions \n");
+	printf(" >>> 3. Display Correct answers \n");
+	printf(" >>> 4. Display highscores \n");
+		scanf("%d",&seloption);
+	switch(seloption){
+			
+			
+		case 2:
+			displayquestions(line,option,option1,option2,option3,option4,fpp);
+			break;
+		case 3:
+			displayans(line,option,option1,option2,option3,option4);
+			break;
+	}
+	}while(seloption!=4);
+    return 0;
+}
+
+void displayquestions(char line[],int option[],char option1[],char option2[],char option3[],char option4[],FILE *fpp){
+for (int j=0;j<10;j++){
+        
+       for (int i=1;i<=7;i++){
+            fgets(line,75,fpp);
+            if (i==1){
+                printf("%s",line);
+            }
+	
+            else if (i==3){
+                strncpy(option1,line,30);
+            }
+            else if (i==4){
+                strncpy(option2,line,30);
+            }
+            else if (i==5){
+                strncpy(option3,line,30);
+            }
+            else if (i==6){
+                strncpy(option4,line,30);
+            }
+	
+            if (i>1&& i<=7){
+                printf("%s",line);
+            }
+        }
+	fflush(stdout);
+        printf("Your option :");scanf("%d",&option[0]);//option[j]=getc(stdin);
+	//getc(stdin);
+	fflush(stdout);
+	printf("\n");
+        
+        
+    }
+}
+
+
+void displayans(char line[],int option[],char option1[],char option2[],char option3[],char option4[]){
+	int correct[]={1,2,3};
+	if (correct[0]==option[0]){
+		printf("Correct ",option1);
+	}
+	else{
+		printf("Wrong");
+	}
+
+
+}
